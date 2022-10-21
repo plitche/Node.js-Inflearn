@@ -1,0 +1,4 @@
+	2. 설치 및 오리엔테이션 - 설치
+		* nodejs.org
+		* node -v
+		* node --version
