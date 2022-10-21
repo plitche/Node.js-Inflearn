@@ -1,0 +1,9 @@
+	1. 설치 및 오리엔테이션 - 수업소개
+		Node.js는 Javascript의 V8위에서 만들어짐
+		- 웹 브라우저만이 아닌 서버쪽에서도 동작하는 Javascript
+		
+		* Language : Web Browser
+		* RunTime : Nodejs
+		두가지 측면의 Javascript가 존재
+		
+		
