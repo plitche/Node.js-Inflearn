@@ -1,0 +1,5 @@
+	10. 섹션:모듈 - NPM으로 모듈 설치
+		*underscore.js
+		
+		- npm init : 우리의 소프트웨어를 패키지로 지정하기 위한 여러가지 환경 설정
+		- npm install underscore
