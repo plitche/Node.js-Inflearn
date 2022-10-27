@@ -1,0 +1,4 @@
+	16. Express - Express를 이용한 간단한 웹앱 만들기
+		* app.get('/', function() {})
+			.get => router(길을 찾다(routing))
+				> 어떤 요청이 들어왔을때 그 요청이 길을 찾을 수 있도록
