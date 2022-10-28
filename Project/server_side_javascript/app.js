@@ -14,6 +14,30 @@ app.get('/login', function(req, res) {
     res.send('Login please');
 })
 
+app.get('/dynamic', function(req, res) {
+    var time = Date()
+    var lis = '';
+    for (var i=0; i<5; i++) {
+        lis += '<li>coding</li>';
+    }
+    res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <ul>${lis}</ul>
+            ${time}
+        </head>
+        <body>
+            Hello, Dynamic!
+        </body>
+        </html>
+    `)
+})
+
 app.listen(3000, function() {
     console.log('Connted 3000 port!');
 })
