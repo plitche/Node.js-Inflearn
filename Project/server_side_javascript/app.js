@@ -1,6 +1,12 @@
 var express = require('express');
 var app = express();
+app.set('views', './views')
+app.set('view engine', 'pug');
 app.use(express.static('public')) // 정적 리소스를 서비스하기위한 디렉토리 설정
+
+app.get('/template', function (req, res) {
+    res.render('index', { title: 'Hey', message: 'Hello there!'});
+  });
 
 app.get('/', function(req, res) {
     res.send('Hello home page');

@@ -1,0 +1,8 @@
+	21. Express 템플릿 엔진 - Express, 템플릿 엔진 사용법
+		* npm install jade --save : 과거 jade 이름이었으나 pug로 바뀜
+		* npm install pug --save
+		
+		views, 템플리트가 있는 디렉토리. 예: app.set('views', './views')
+		view engine, 사용할 템플리트 엔진. 예: app.set('view engine', 'pug')
+		
+		* supervisor app.js : 파일을 수정하면 watch하다가 알아서 서버가 재시작함.
