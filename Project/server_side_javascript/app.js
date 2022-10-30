@@ -6,7 +6,20 @@ app.set('view engine', 'pug');
 app.use(express.static('public')) // 정적 리소스를 서비스하기위한 디렉토리 설정
 
 app.get('/topic', function(req, res) {
-    res.send(req.query.id+','+req.query.name);
+    var topics = [
+        'Javascript is ...',
+        'Nodejs is ...',
+        'Express is ...'
+    ];
+
+    var output = `
+        <a href="/topic?id=0" >JavaScript</a><br/>
+        <a href="/topic?id=1" >Nodejs</a><br/>
+        <a href="/topic?id=2" >Express</a><br/><br/>>
+
+        ${topics[req.query.id]}
+    `
+    res.send(output)
 })
 
 app.get('/template', function (req, res) {
