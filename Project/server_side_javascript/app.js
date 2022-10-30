@@ -5,6 +5,10 @@ app.set('views', './views')
 app.set('view engine', 'pug');
 app.use(express.static('public')) // 정적 리소스를 서비스하기위한 디렉토리 설정
 
+app.get('/topic', function(req, res) {
+    res.send(req.query.id+','+req.query.name);
+})
+
 app.get('/template', function (req, res) {
     res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
