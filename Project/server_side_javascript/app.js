@@ -1,13 +1,23 @@
 var express = require('express');
+var bodyParse = require('body-parser');
+const bodyParser = require('body-parser');
 var app = express();
 app.locals.pretty = true;
 app.set('views', './views')
 app.set('view engine', 'pug');
 app.use(express.static('public')) // 정적 리소스를 서비스하기위한 디렉토리 설정
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/form_receiver', function(req, res) {
     var title = req.query.title;
     var description = req.query.description;
+
+    res.send(title+','+description)
+})
+
+app.post('/form_receiver', function(req, res) {
+    var title = req.body.title;
+    var description = req.body.description;
 
     res.send(title+','+description)
 })
