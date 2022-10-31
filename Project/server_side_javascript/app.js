@@ -5,6 +5,17 @@ app.set('views', './views')
 app.set('view engine', 'pug');
 app.use(express.static('public')) // 정적 리소스를 서비스하기위한 디렉토리 설정
 
+app.get('/form_receiver', function(req, res) {
+    var title = req.query.title;
+    var description = req.query.description;
+
+    res.send(title+','+description)
+})
+
+app.get('/form', function(req, res) {
+    res.render('form');
+})
+
 app.get('/topic/:id', function(req, res) {
     var topics = [
         'Javascript is ...',
@@ -73,4 +84,5 @@ app.get('/dynamic', function(req, res) {
 app.listen(3000, function() {
     console.log('Connted 3000 port!');
 })
+
 
