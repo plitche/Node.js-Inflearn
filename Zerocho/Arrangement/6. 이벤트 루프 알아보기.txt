@@ -1,0 +1,29 @@
+ function run() {
+	console.log('3초후 실행');
+ }
+ 
+ console.log('시작');
+ setTimeout(run, 3000);
+ console.log('끝')
+ 
+ -> 호출 스택만으로는 설명이 안됨
+ -> 호출 스택 + 이벤트 루프로 설명
+ 
+ =============================
+ 
+ function oneMore() {
+	console.log('one more');
+ }
+ function run() {
+	console.log('run run');
+	setTimeout(() => {
+		coonsole.log('wow');
+	}, 0)
+	new Promise((resolve) => {
+		resolve('hi');
+	})
+	.then(console.log);
+	oneMore();
+ }
+ 
+ setTimeout(run, 5000);
