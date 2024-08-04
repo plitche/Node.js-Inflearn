@@ -1,0 +1,10 @@
+- 예정 방식
+	var won = 1000;
+	var result = '이 과자는' + won + '원 입니다. // 이 과자는1000원입니다.
+	var result = '이 과자는 ' + won + '원 입니다. // 이 과자는 1000원입니다.
+	
+- 최신
+	const result = `이 과자는 ${won}원 입니다`;
+	
+	function() {}
+	a(); = a``;

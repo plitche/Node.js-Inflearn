@@ -1,0 +1,42 @@
+* 화살표 함수
+	- add1, add2, add3, add4는 같은 기능을 하는 함수
+		> add2 : add1을 화살표 함수로 나타낼 수 있음
+		> add3 : 함수의 본문이 return만 있는 경우 return 생략
+		> add4 : return이 생략된 함수의 본문을 소괄호로 감싸줄 수 있음
+		> not1과 noot2도 같은 기능을 함(매개변수 하나일 때 괄호 생략)
+		
+	function add1(x, y) {
+		return x + y;
+	}
+	
+	conost add2 = (x, y) => {
+		return x + y;
+	}
+	=> 중괄호 다음 바로 {} 괄호가 나오는 경우 생략 가능
+	
+	const add3 = (x, y) => x + y;
+	const add4 = (x, y) => (x + y);
+	
+	funciton not1(x) {
+		return !x;
+	}
+	
+	const not2 = x => !x;
+	
+	
+	- 화살표 함수가 기존 function() {}을 대체하는 건 아님(this가 달라짐)
+		> logFriends 메서드의 this 값에 주목
+		> forEach의 function의 this와 logFriends의 this는 다름
+		> that이라는 중간 변수를 이용해서 logFriends의 this를 전달
+	
+	var relationship1 = {
+		name: 'zero',
+		friends: ['1', '2', '3'],
+		logFriends: function() {
+			var that = this; // relationship1을 가리키는 this를 that에 저장
+			this.friends.forEach(function (friend) {
+				console.log(that.name, friend);
+			});
+		}
+	}
+	relationship1.logFriends();
