@@ -1,0 +1,41 @@
+* 노드 내장 객체 알아보기
+	- global
+		> 브라우저의 window같은 역할
+		> 모든 파일에서 접근 가능
+		> window처럼 생략도 가능(console, require도 global의 속성)
+		
+	- global 속성에 값을 대입하면 다른 팡리에서도 사용 가능
+		> globalA.js
+			module.exports = () => global.message;
+			
+		> globalB.js
+			const A = require('./globalA');
+			
+			global.messsage = '안녕하세요';
+			console.log(A());
+			
+		> 콘솔
+			$ node globalB
+			안녕하세요
+			
+	
+	
+	- console 객체
+		> 브라우저의 console 객체와 매우 유사
+			console.time, console.timeEnd 시간 로깅
+			console.error
+			console.log
+			console.dir 객체 로깅
+			console.trace 호출스택 로깅
+			
+	- 타이머 메서드
+		> set 메서드에 clear 메서드가 대응됨
+			set 메서드의 리턴 값(아이디)을 clear 메서드에 넣어 취소
+			
+			setTimeout(콜백 함수, 밀리초)
+			setInterval(콜백 함수, 밀리초)
+			setImmediate(콜백 함수) : 콜백 함수를 즉시 실행합니다.
+			
+			clearTimeout(아이디)
+			clearInterval(아이디)
+			clearImmediate(아이디)
