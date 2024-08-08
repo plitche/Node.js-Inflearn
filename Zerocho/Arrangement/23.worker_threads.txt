@@ -1,0 +1,8 @@
+* worker_threads
+	- 노드에서 멀티 스레드 방식으로 작업할 수 있음.
+	- isMainThread: 현재 코드가 메인 스레드에서 실행되는지, 워커 스레드에서 실행되는지 구분
+	- 메인 스레드에서는 new Worker를 통해 현재 파일(__filename)을 워커 스레드에서 실행시킴
+	- worker.postMessage로 부모에서 워커로 데이터를 보냄
+	- parentPort.on('message')로 부모로부터 데이터를 받고, postMessage로 데이터를 보냄
+	
+	

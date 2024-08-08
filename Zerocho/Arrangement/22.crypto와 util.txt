@@ -67,11 +67,13 @@
 	const util = require('util')
 	const crpyto = require('crypto')
 
+	// 함수가 deprecated 처리되었음을 알려줍니다.
 	const dontUseMe = util.deprecate((x, y) => {
 		console.log(x + y)
 	}, 'dontUseMe 함수는 deprecated 되었으니 더이상 사용하지 마세요!');
 	dontUseMe(1, 2)
 
+	// 콜백 패턴을 프로미스 패턴으로 바꿔줍니다.
 	const randomBytesPromise = util.promisify(crpyto.randomBytes);
 	randomBytesPromise(64)
 		.then((buf) => {
@@ -81,20 +83,4 @@
 			console.error(error)
 		})
 			
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
