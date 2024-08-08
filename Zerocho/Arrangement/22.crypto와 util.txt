@@ -1,0 +1,100 @@
+* 단방향 암호화(crypto)
+	- 암호화는 가능하지만 복호화는 불가능
+		> 암호화: 평문을 암호로 만듦
+		> 복호화: 암호를 평문으로 해독
+		
+	- 단방향 암호화의 대표 주자는 해시 기법
+		> 문자열을 고정된 길이의 다른 문자열로 바꾸는 방식
+		> abcdefgh 문자열 -> qvew
+		
+* Hash 사용하기(sha512)
+	- createHash(알고리즘): 사용할 해시 알고리즘을 넣어줍니다.
+	- update(문자열): 변환할 문자열을 넣어줍니다.
+	- digest(인코딩): 인코딩할 알고리즘을 넣어줍니다.
+	
+	const crypto = require('crypto');
+	
+	console.log('base64:', crypto.createHash('sha512').update('비밀번호').digest('base64'));
+	console.log('hex:', crypto.createHash('sha512').update('비밀번호').digest('hex'));
+	console.log('base64:', crypto.createHash('sha512').update('다른 비밀번호').digest('base64'));
+	
+* pbkdf2
+	- 컴퓨터의 발달로 기존 암호화 알고리즘이 위협받고 있음
+	- sha512가 취약해지면 sha3으로 넘어가야함
+	- 현재는 pbkdf2나, bcrypt, scrypt 알고리즘으로 비밀번호를 암호화
+	- Node는 pbkdf2와 scrypt 지원
+	
+* pbkdf2 예제
+	- crypto.randomBytes로 64바이트 문자열 생성 : salt 역할
+	- 반복 횟수를 조정해 암호화하는 데 1초 정도 걸리게 맞추는 것이 권장됨
+	
+	const crypto = require('crypto');
+	
+	crypto.randomBytes(64, (err, buf) => {
+		const salt = buf.toString('base64')
+		console.log('salt:', salt);
+		crypto.pbkdf2('비밀번호', salt, 100000, 64, 'sha512', (err, key) => {
+			console.log('password:', key.toString('base64'))
+		})
+	})
+	
+* 양방향 암호화
+	- 대칭형 암호화(암호문 복호화 가능)
+	- Key가 사용됨
+	- 암호화할 때와 복호화 할 때 같은 Key를 사용해야 함
+	
+	const crypto = require('crypto')
+
+	const algorithm = 'aes-256-cbc'
+	const key = 'abcdefghijklmnopqrstuvwxyz';
+	const iv = '1234567890123456'
+
+	const cipher = crypto.createCipheriv(algorithm, key, iv); // 암호화 알고리즘과 키, 초기화 벡터를 넣어준다.
+	let result = cipher.update('암호화할 문장', 'utf-8', 'base64') // 암호화할 대상과 대상의 인코딩, 출력 결과물의 인코딩을 넣어준다.
+	result += cipher.final('base64') // 출력 결과물의 인코딩을 넣어주면 암호화가 완료된다
+	console.log('암호화:', result)
+
+
+	const decipher = crypto.createDecipheriv(algorithm, key, iv) // 복화할때 사용. 암호화할 때 사용한 알고리즘과 키, iv를 그대로 사용해야함
+	let result2 = decipher.update(result, 'base64', 'utf-8')
+	result2 += decipher.final('utf-8') // 복호화 결과물의 인코딩을 넣어준다.
+	console.log('복호화:', result2)
+
+* util
+	- 각종 편의 기능을 모아둔 모듈
+	- deprecated와 promisify가 자주 쓰임
+	
+	const util = require('util')
+	const crpyto = require('crypto')
+
+	const dontUseMe = util.deprecate((x, y) => {
+		console.log(x + y)
+	}, 'dontUseMe 함수는 deprecated 되었으니 더이상 사용하지 마세요!');
+	dontUseMe(1, 2)
+
+	const randomBytesPromise = util.promisify(crpyto.randomBytes);
+	randomBytesPromise(64)
+		.then((buf) => {
+			console.log(buf.toString('base64'))
+		})
+		.catch((error) => {
+			console.error(error)
+		})
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
