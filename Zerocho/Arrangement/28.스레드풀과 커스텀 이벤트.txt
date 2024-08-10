@@ -1,0 +1,29 @@
+* 스레드풀 알아보기
+	- fs, cypto, zlib 모듈의 메서드를 실행할 때는 백그라운드에서 동시에 실행됨
+	- 스레드풀이 동시에 처리해줌
+	
+	const crypto = require('crpyto')
+
+	const pass = 'pass'
+	const salt = 'salt'
+	const start = Date.now();
+
+	crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+		console.log('1: ', Date.now() - start)
+	})
+
+	crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+		console.log('2: ', Date.now() - start)
+	})
+
+	crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+		console.log('3: ', Date.now() - start)
+	})
+
+	crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+		console.log('4: ', Date.now() - start)
+	})
+	
+	SET UV_THREADPOOL_SIZE=8 명령어 : 노드에서 스레드 개수 조절
+	
+* 
