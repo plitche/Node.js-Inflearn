@@ -1,3 +1,45 @@
+# node_modules: 설치된 Node.js 패키지들이 저장되는 디렉토리로, 프로젝트의 모든 의존성이 포함되어 있습니다.
+# 이 디렉토리는 보통 무시합니다, 왜냐하면 package.json과 package-lock.json 파일만으로도 의존성을 관리할 수 있기 때문입니다.
+node_modules/
+
+# 로그 파일들: 애플리케이션에서 생성되는 로그 파일들을 무시합니다.
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 환경 변수 파일: 민감한 데이터(예: API 키, 데이터베이스 자격증명 등)가 저장되는 파일로, 보통 버전 관리에서 제외합니다.
+.env
+
+# 운영 체제에 따라 생성되는 파일들: macOS와 Windows에서 자동으로 생성되는 파일들을 무시합니다.
+.DS_Store
+Thumbs.db
+
+# 빌드 결과물: Babel이나 TypeScript 같은 트랜스파일러가 생성하는 빌드 결과물 디렉토리입니다.
+dist/
+build/
+
+# IDE 설정 파일들: 개발자가 사용하는 IDE(예: VSCode, WebStorm 등)의 개인 설정 파일들을 무시합니다.
+.vscode/
+.idea/
+
+# 테스팅 결과물
+coverage/
+
+# 잠금 파일
+*.lock
+
+# npm package에서 공개하고 싶지 않은 특정 파일들
+/secret/
+
+# pm2의 프로세스 관리 파일
+.pids
+
+# eslint 캐시 파일
+.eslintcache
+
+# 특정 디렉토리 안의 파일들 무시 (예시로 src 안의 .test 파일들을 무시하는 방법)
+# src/*.test.js
+
 Project/server_side_javascript/node_modules/underscore/LICENSE
 Project/server_side_javascript/node_modules/underscore/package.json
 Project/server_side_javascript/node_modules/underscore/README.md

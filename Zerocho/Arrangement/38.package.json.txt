@@ -1,0 +1,43 @@
+* npm이란?
+	- Node Package Manager
+	
+	- 노드의 패키지 매니저
+	- 다른 사람들이 만든 소스 코드들을 모아둔 저장소
+	- 남의 코드를 사용하여 프로그래밍 가능
+	- 이미 있는 기능을 다시 구현할 필요가 없어 효율적
+	- 오픈 소스 생태계를 구성중
+	
+	- 패키지: npm에 업로드된 노드 모듈
+	- 모듈이 다른 모듈을 사용할 수 있듯 패키지도 다른 패키지를 사용할 수 있음
+	- 의존 관계라고 부름
+	
+* package.json
+	- 현재 프로젝트에 대한 정보와 사용 중인 패키지에 대한 정보를 담은 파일
+		> 같은 패키지라도 버전별로 기능이 다를 수 있으므로 버전을 기록해두어야 함
+		> 동일한 버전을 설치하지 않으면 문제가 생길 수 있음
+		> 노드 프로젝트 시적 전 package.json부터 만들고 시작함(npm init)
+
+* npm 스크립트
+	- npm init이 완료되면 폴더에 package.json이 생성됨
+	
+	{
+	  "name": "npmtest",
+	  "version": "1.0.0",
+	  "description": "",
+	  "main": "index.js",
+	  "scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	  },
+	  "author": "plitche",
+	  "license": "MIT"
+	}
+
+	- npm run [스크립트명]으로 스크립트 실행
+	
+	- express 설치하기 : npm i express
+		> package.json에 기록됨
+		
+	- npm i cookie-parser body-parser
+		> 위처럼 두개를 동시에 설치 가능
+		
+	- npm i -D nodemon : DEV dependency(개발시에만 쓰임)
