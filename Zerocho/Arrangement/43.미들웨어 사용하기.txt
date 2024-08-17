@@ -1,0 +1,4 @@
+* 와일드카드(라우트 매개변수)
+	app.get('/:hello', (req, res) => {
+		res.send('hello express');
+	})
