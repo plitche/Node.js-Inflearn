@@ -16,13 +16,36 @@ app.use('/about', (req, res, next) => { // 미들웨어 설정
     next();
 }, (req, res, next) => { // 미들웨어 설정
     // throw new Error('에러가 났어요')
+
+    try { 
+        console.log(asdfeqf)
+    } catch (error) {
+       next(error) // next에 인수가 들어있으면 바로 erorr처리 미들웨어로 넘어간다.
+    }
     next();
 })
 
-app.get('/', (req, res) => { // 이런 요청 하나하나를 라우터라고 함
+app.get('/', (req, res, next) => { // 이런 요청 하나하나를 라우터라고 함
     res.sendFile(path.join(__dirname, 'index.html')) // __dirname 현재 파일의 절대 경로
     // res.send('안녕하세요') // sendFile, send 두번이상 나오면 오류가 발생한다. 미들웨어에서 send를 하고 router로 넘어와서 send를 해도 오류 발생
-    // res.json({hello: 'zerocho'})
+
+    // res.writeHead(200, { 'Content-Type': 'application/json '})
+    // res.end(JSON.stringify( {hello : 'zerocho'} )) // 이 코드를 express에서 아래처럼 줄여서 쓸 수 있다.
+
+    // res.json({hello: 'zerocho'}) // res.json은 return이 아니다. 응답을 보낼 뿐이지 함수 자체를 종료하는 것이 아니다.
+    // console.log('hello zerocho')
+
+    if (true) {
+        next('route')
+    } else {
+        next()
+    }
+}, (req, res) => {
+    console.log('실행되나요?')
+})
+
+app.get('/', (req, res) => { // 이런 요청 하나하나를 라우터라고 함
+    console.log('실행되지롱')
 })
 
 app.post('/', (req, res) => {
