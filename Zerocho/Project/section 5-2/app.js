@@ -12,15 +12,43 @@ app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev')); // 요청과 응답을 기록하는 라우터 'dev', 'combiend'
 // 정적파일 읽을 때(요청경로, express.static(실제 경로))
 // localhost:3000/zerocho.html -> learn-express/public/zerocho.html
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', (req, res, next) => {
+    if (req.session.id) {
+        express.static(path.join(__dirname, 'public'))(req, res, next)
+    } else {
+        next()
+    }
+})
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+    resave: false,  // 요청이 왔을 때 세션에 수정사항이 생기지 않아도 다시 저장할지 여부
+    saveUninitialized: false,   // 세션에 저장할 내역이 없더라도 세션을 저장할지
+    secret: 'zerochopassword',
+    cookie: {
+        httpOnly: true,
+    },
+    // name: 'connect.sid', default
+
+}))
 app.use(express.json()); // bodyParser 대체, client가 json데이터를 보냈을때 parsing 해서 body에 넣어준다.
 app.use(express.urlencoded({ extended: true })); // form submit 데이터를 parsing 해준다.
-app.use(session())
-app.use(multer().array())
+// app.use(multer().array())
+
+// let hello = "계좌 비번" : 이렇게 전역변수나 set 하면 안됀다. 공유됨
+// app.set('계좌 비번', '123')
+app.use((req, res, next) => {
+    req.session.data = 'zerocho비번' // 영구적(요청마다 남아있음)
+    req.data = 'zerocho비번' // 일시적(일회성, 해당 요청에만)
+})
 
 app.get('/', (req, res, next) => {
+    req.session.data // zerocho비번
+    req.data // zerocho비번
     console.log('GET / 요청에서만 실행됩니다.');
+    // 이것 자체가 사용자의 고유 session이다.
+    // req.session.id = 'hello';
+    // req.session.destory() : 세션 모두 제거
+
     req.cookies // { mycookie: 'test' }
     req.signedCookies;
     // 'Set-Cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,

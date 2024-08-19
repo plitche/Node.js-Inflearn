@@ -1,0 +1,28 @@
+* 미들웨어간 데이터 전달하기	
+	- req나 res 객체 안에 값을 넣어 데이터 전달 가능
+		> app.set과의 차이점: app.set은 서버 내내 유지, req, res는 요청 하나 동안만 유지
+		> req.body나 req.cookies같은 미들웨어의 데이터와 겹치지 않게 조심
+		
+	app.use((req, res, next) => {
+		req.data = '데이터 넣기'
+		next();
+	}, (req, res, next) => {
+		console.log(req.data) // 데이터 받기
+		next();
+	})
+	
+* 미들웨어 확장하기
+	- 미들웨어 안에 미들웨어를 넣는 방법
+	app.use(morgan('dev'));
+		==
+	app.use((req, res, next) => {
+		morgan('dev')(req, res, next)
+	})
+	
+	app.use((req, res, next) => {
+		if (process.env.NODE_ENV == 'production') {
+			morgan('conbined')(req, res, next)
+		} else {
+			morgan('dev')(req, res, next)
+		}
+	})
