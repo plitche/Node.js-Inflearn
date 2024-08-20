@@ -3,7 +3,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
 const multer = require('multer')
-
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
@@ -73,4 +74,34 @@ app.use((err, req, res, next) => {
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기 중');
+});
+
+try {
+    fs.readdirSync('uploads')
+} catch (error) {
+    console.log('uploads 폴더가 없어 uploads 폴더를 생성합니다.')
+    fs.mkdirSync('uploads')
+}
+const upload = multer({
+    storage: multer.diskStorage({ // upload한 파일을 어디에 저장할지 선택
+        destination(req, file, done) {
+            done(null, 'uploads/')
+        },
+        filename(req, file, done) {
+            const ext = path.extname(file.originalname)
+            done(null, path.basename(file.originalname, ext) + Date.now() + ext)
+        },
+    }),
+    limits: {fileSize : 5 * 1024 * 1024}
+})
+app.get('/upload', (req, res) => {
+    res.sendfile(path.join(__dirname, 'multipart.html'))
+})
+app.post('/upload', upload.single('image'), (req, res) => { // 1개의 파일만 upload 할 때
+    console.log(req.file);
+    res.send('ok');
+});
+app.post('/upload2', upload.array('image'), (req, res) => { // 1개의 파일만 upload 할 때
+    console.log(req.files);
+    res.send('ok');
 });

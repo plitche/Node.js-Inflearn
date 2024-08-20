@@ -1,0 +1,24 @@
+* 멀티파트 데이터 형식	
+	- form 태그의 enctype이 multipart/form-data인 경우
+		> body-parser로는 요청 본무을 해석할 수 없음
+		> multer 패키지 필요
+		> npm i multer
+		
+* multer 미들웨어들
+	- single과 none, array, fields등이 존재
+		> single은 하나의 파일을 업로드 할 때, none은 파일은 업로드 하지 않을 때
+		> req.file 안에 업로드 정보 저장
+			{
+				fieldname: 'img',
+				originalname: '',
+				encoding: '',
+				mimetype: 'image/png',
+				destination: 'uploads/',
+				filename: 'nodejs51510123.png',
+				path: 'uploads\\nodejs2305915.png',
+				size: 55312	
+			}
+		> array와 fields는 여러 개의 파일을 업로드 할 때 사용
+		> array는 하나의 요청 body 이름 아래 여러 파일이 있는 경우
+		> fields는 여러 개 의 요청 body 이름 아래 파일이 하나씩 있는 경우
+		> 두 경우 모두 업로드된 이미지 정보가 req.files 아래에 존재
