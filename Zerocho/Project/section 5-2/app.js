@@ -1,3 +1,4 @@
+const dotenv = require('dotenv')
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -6,7 +7,10 @@ const multer = require('multer')
 const fs = require('fs');
 const path = require('path');
 
+dotenv.config();
 const app = express();
+
+
 app.set('port', process.env.PORT || 3000);
 
 // 미들 웨어들 간에 순서도 중요하다.
@@ -24,7 +28,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
     resave: false,  // 요청이 왔을 때 세션에 수정사항이 생기지 않아도 다시 저장할지 여부
     saveUninitialized: false,   // 세션에 저장할 내역이 없더라도 세션을 저장할지
-    secret: 'zerochopassword',
+    secret: 'process.env.COOKIE_SECRET',
     cookie: {
         httpOnly: true,
     },
