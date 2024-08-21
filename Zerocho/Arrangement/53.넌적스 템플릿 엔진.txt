@@ -1,0 +1,15 @@
+* 넌적스 - 변수
+	- Pug를 지우고 Nunjucks 설치
+	- 확장자는 html 또는 njk
+	
+	npm i unnjucks
+	
+	const nunjucks = require('nunjucks')
+	app.set('view engine', 'html')
+	nunjucks.configure('views', {
+		express: app,
+		watch: true,
+	})
+	
+	
+	
