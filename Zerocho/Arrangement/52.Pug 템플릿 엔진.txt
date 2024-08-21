@@ -1,0 +1,24 @@
+* 템플릿 엔진
+	- HTML의 정적인 단점을 개선
+		> 반복문, 조건문, 변수 등을 사용할 수 있음
+		> 동적인 페이지 작성 가능
+		> PHP, JSP와 유사함
+		
+* Pug(구 Jade)
+	- 문법이 Ruby와 비슷해 코드 양이 많이 줄어듦
+		> HTML과 많이 달라 호불호가 갈림
+		> 익스프레스에 app.set으로 퍼그 연결
+		
+	- pug는 <> 꺽쇠나 닫는 태그가 없다.
+	- 줄 바꿈은 탭
+	- div, span, p 같은 많이쓰는 태그는 생략 가능. 
+		그냥 #login-button -> <div id="login-button"></div>
+	- p Wellcome to Express => <p>Wellcome to Express</p>
+	- button(type="submit") 전송 => <button type="submit">전송</button>
+	
+* Pug 변수
+	- res.render에서 두 번째 인수 객체에 Pug 변수를 넣음
+	
+	router.get('/', function(req, res,next) {
+		res.render('index', {title: 'Express'});
+	})
