@@ -33,5 +33,6 @@
 * 명령어
 	- DESC 테이블명: 테이블 생성 확인
 	- DROP TABLE 테이블명: 테이블 삭제
+	- SHOW TABLES: 테이블 목록 보기
 
 	
