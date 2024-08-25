@@ -1,0 +1,18 @@
+* 관계 정의하기
+	- users 모델과 comments 모델 간의 관계를 정의
+		> 1:N 관계 (사용자 한 명이 댓글 여러 개 작성)
+		> 시퀄라이즈에서는 1:N 관계를 hasMany로 표현 (사용자.hasMany(댓글))
+		> 반대의 입장에서는 belongsTo(댓글.belongsTo(사용자))
+		> belongsTo가 있는 테이블에 컬럼이 생김(댓글 테이블에 commenter 컬럼)
+		
+* 1대1 관계
+	- 예) 사용자 테이블과 사용자 정보 테이블
+		> db.User.hasOne(db.Info, {foreignKey: 'UserId', sourceKey: 'id'})
+		> db.Info.belongsTo(db.User, {foreignKey: 'UserId', targetKey: 'id'})
+		
+* 다대다 관계
+	- 예) 게시글과 해시태그 테이블
+	- 하나의 게시글이 여러 개의 해시태그를 가질 수 있고 하나의 해시태그가 여러 개의 게시글을 가질 수 있음
+	- DB 특성상 다대다 관계는 중간 테이블이 생김
+		> db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' })
+		> db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' })
