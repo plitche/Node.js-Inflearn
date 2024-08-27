@@ -1,0 +1,72 @@
+* 시퀄라이즈 쿼리 알아보기
+	INSERT INTO nodejs.users (name, age, married, comment) VALUES ('zero, 24, 0, '자기소개')
+	const { User } = require('../models')
+	User.create({
+		name: 'zero',
+		age: 24,
+		married: false,
+		comment: '자기소개1',
+	})
+		
+
+	SELECT * FROM nodejs.users;
+	User.findAll({})
+	
+
+	SELECT name, amrried FROM nodejs.users;
+	User.findAll({
+		attributes: ['name', 'married']
+	})
+	
+	
+	SELECT name, age FROM nodejs.users WHERE married = 1 AND age > 30
+	const { Op } = require('sequlize')
+	const { User } = require('../models')
+	User.findAll({
+		attributes: ['name', 'age'],
+		where: {
+			married: true,
+			age: { [Op.gt]: 30 }
+		}
+	})
+	
+	
+	SELECT name, age FROM nodejs.users WHERE married = 0 OR age > 30
+	const { Op } = require('sequlize')
+	const { User } = require('../models')
+	User.findAll({
+		attributes: ['name', 'age'],
+		where: {
+			[Op.or]: [{ married: false }, {age { [Op.gt]: 30 } }]
+		}
+	})
+	
+	
+	SELECT id, name FROM users ORDER BY age DESC;
+	User.findAll({
+		attributes: ['id', 'name'],
+		order: [['age', 'DESC']]
+	})
+	
+	
+	SELECT id, name FROM users ORDER BY age DESC LIMIT 1;
+	User.findAll({
+		attributes: ['id', 'name'],
+		order: [['age', 'DESC']],
+		limit: 1
+	})
+	
+	
+	UPDATE nodejs.users SET comment = '바꿀 내용' WHERE id = 2;
+	User.update({
+		comment: '바꿀 내용',
+	}, {
+		where: { id: 2 }
+	})
+	
+	
+	DELETE FROM nodejs.users WHERE id = 2;
+	User.destory({
+		where: { id: 2 }
+	})
+	
