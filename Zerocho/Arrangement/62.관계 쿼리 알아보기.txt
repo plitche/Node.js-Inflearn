@@ -1,0 +1,57 @@
+* 관계 쿼리 알아보기
+	- 결과값이 자바스크립트 객체임
+		const user = await User.findOne({})
+		console.log(user.nick)
+		
+	- include로 JOIN과 비슷한 기능 수행 가능
+		const user = await User.findOne({
+			include: [{
+				model: comment
+			}]
+		})
+		
+	- 다대다 모델은 다음과 같이 접근 가능
+		db.sequelize.models.PostHashtag
+		
+	- get + 모델명으로 관계 있는 데이터 로딩 가능
+		const user = await User.findOne({})
+		const comments = await user.getComments();
+		console.log(comments);
+		
+	- as로 모델명 변경 가능
+		db.User.hasMany(db.Comment, { foreignKey: 'commenter', sourceKey: 'id', as: 'Answers})
+		
+		const user = await User.findOne({})
+		const comments = await user.getAnswers();
+		console.log(comments)
+		
+	- include나 관계 쿼리 메서드에서도 where 나 attribute
+		const user = await User.findOne({
+			include: [{
+				model: Comment,
+				where: {
+					id: 1,
+				},
+				attributes: ['id']
+			}]
+		});
+		// 또는
+		const comments = await user.getComments({
+			where: {
+				id: 1
+			},
+			attributes: ['id']
+		})
+		
+	- 생성 쿼리
+		const user = await User.findOne({})
+		const comment = await Comment.create();
+		await user.addComment(comment)
+		// 또는
+		await user.addComment(comment.id)
+		
+		
+* raw 쿼리
+	- 직접 SQL을 쓸 수 있음
+		const [result, metadata] = await sequelize.query('SELECT * FROM comments');
+		console.log(result)
