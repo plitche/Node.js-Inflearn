@@ -1,0 +1,27 @@
+* NoSQL
+	- MySQL과 같은 SQl 데이터베이스와는 다른 유형의 데이터
+	- SQL
+		> 규칙에 맞는 데이터 입력
+		> 테이블 간 JOIN 지원
+		> 안정성, 일관성
+		> 테이블, 로우, 컬럼
+		
+	- NoSQL
+		> 자유로운 데이터 입력
+		> 컬렉션 간 JOIN 미지원
+		> 확장성, 가용성
+		> 컬렉션, 다큐먼트, 필드
+		
+	- 빅데이터, 메시징, 세션 관리 등(비정형 데이터)에는 모고디비 사용하면 좋음
+	
+* Window
+	- https://www.mongodb.com/try/download/community
+	
+	
+* 몽고디비 연결하기
+	- 윈도의 경우 C:/에  data 폴더를 만들고 그 안에 db 폴더를 만듬
+	- 콘솔로 몽고디비가 설치된 경로(c:/ProgramFiles/mongodb/Server/*.*/bin)로 이동해 몽고디비를 실행
+		> cd ~~
+		> mongod
+		
+	- 다른 콘솔을 하나 더 열어 mongo 명령어 입력
