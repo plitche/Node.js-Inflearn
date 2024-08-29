@@ -1,0 +1,27 @@
+* 어드민 설정하기
+	- 어드민 권한을 설정하여 디비에 비밀번호 걸기
+		> user admin
+		> db.createUser({user: '이름', pwd: '비밀번호', roles:['root']})
+		
+	- mongod를 입력했던 콘솔 종료한 후 mongod --auth 명령어로 접속
+		> --auth는 로그인이 필요하다는 뜻
+		
+	- mongo를 입력한 콘솔도 종료 후 mongo admin -u 이름 -p 비밀번호로 접속
+	
+* 컴퍼스(MongoDB Compass Comuunity)로 접속
+	- new Connection
+
+* 데이터베이스 생성하기
+	- user 데이터베이스명
+	- show dbs로 목록 확인
+	- db로 현재 사용중인 데이터베이스 확인
+	
+* 컬렉션 생성하기
+	- 따로 생성할 필요 없음
+		> 다큐먼트를 넣는 순간 컬렉션도 자동 생성됨
+		> 직접 생성하는 명령어도 있음
+			db.createCollections('users')
+			
+	- show collections로 확인
+	
+	
