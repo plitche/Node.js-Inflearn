@@ -6,3 +6,5 @@
 		
 	- 예제는 https://github.com/zerocho/nodejs-book/tree/master/ch8/8.6/learn-mongoose
 		> 프로젝트 세팅 후 콘솔을 통해 경로로 이동한 후 package.json 설치
+		
+		
