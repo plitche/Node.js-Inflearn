@@ -1,0 +1,8 @@
+* 몽구스 ODM
+	- 몽고디비 작업을 쉽게 할 수 있도록 도와주는 라이브러리
+		> ODM : Object Document Mapping 객체와 다큐먼트를 매핑(1대1 짝지음)
+		> 몽고디비에 없어 불편한 기능들을 모구스가 보완
+		> 테이블과 유사한 기능, JOIN 기능 추가
+		
+	- 예제는 https://github.com/zerocho/nodejs-book/tree/master/ch8/8.6/learn-mongoose
+		> 프로젝트 세팅 후 콘솔을 통해 경로로 이동한 후 package.json 설치
