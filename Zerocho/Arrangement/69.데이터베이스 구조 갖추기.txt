@@ -1,0 +1,2 @@
+- npx sequelize db:create
+	: 위 명령어를 작성하면 config 파일을 찾아서 해당 파일의 설정대로 진행한다.
