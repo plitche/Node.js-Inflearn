@@ -1,0 +1,13 @@
+* NodeBird SNS 서비스
+	- 기능: 로그인, 이미지 업로드, 게시글 작성, 해시태그 검색, 팔로임
+		> express-generator 대신 직접 구조를 갖춤
+		> 프런트엔드 코드보다 노드 라운터 중심으로
+		> 관계형 데이터베이스 MySQL
+		
+* 프로젝트 시작하기	
+	- nodebird 폴더를 만들고 package.json 파일 생성
+	- npm i express express-session nunjucks morgan cookie-parser sequelize mysql2 sequelize-cli
+	- npx sequelize init
+	- npm i dotenv
+	- npm i multer
+	
