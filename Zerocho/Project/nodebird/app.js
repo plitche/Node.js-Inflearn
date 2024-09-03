@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 
 dotenv.config(); // 가능한 젤 위에
 const pageRouter = require('./routes/page');
+const { sequelize } = require('./models');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
@@ -16,6 +17,15 @@ nunjucks.configure('views', {
   express: app,
   watch: true,
 });
+// force: true를 하면 model 변경 시 테이블이 삭제되었다가 다시 생성됨(데이터 날라감)
+// alter: true를 하면 테이블 alter를 해주지만 가끔 컬럼이랑 기존 데이터간 문제가 생길 수 있다.
+sequelize.sync({ force: false }) 
+  .then(() => {
+    console.log('데이터베이스 연결 성공');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));

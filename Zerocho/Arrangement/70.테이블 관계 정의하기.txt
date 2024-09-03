@@ -1,0 +1,28 @@
+* models/index.js
+	- 시퀄라이즈가 자동으로 생성해주는 코드 대신 다음과 같이 변경
+		> 모델들을 불러옴(require)
+		> 모델 간 관계가 있는 경우 관계 설정
+		
+		> User(1) : POST(다)
+		> POST(다) : Hashtag(다)
+		> User(다) : User(다)
+		
+* associate 작성하기
+	- 모델간의 관계들 associate에 작성
+		> 1대다 : hasMany와 belongsTo
+		> 다대다 : belongsToMany
+			foreignKey: 외래키
+			as: 컬럼에 대한 별명
+			through: 중간 테이블명
+			
+* 팔로잉 - 팔로워 다대다 관계
+	- User(다) : User(다)
+		> 다대다 관계이므로 중간 테이블(Follow) 생성됨
+		> 모델 이름일 같으므로 구분 필요함 (as가 구분자 역할, foreignKey는 반대 테이블 컬럼의 프라이머리 키 컬럼)
+		> 시퀄라이즈 as 이름을 바탕으로 자동으로 addFollower, getFollowers, addFollowing, getFollowings 메서드 생성
+		
+* 시퀄라이즈 설정하기
+	- 시퀄라이즈 설정은 config/config.json에서
+		> 개발환경용 설정은 development 아래에
+	- 설정 파일 작성 후 nodebird 데이터베이스 생성
+		> npx sequelize db:create

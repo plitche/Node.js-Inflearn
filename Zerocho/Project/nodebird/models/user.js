@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 class User extends Sequelize.Model {
-  static initiate(sequelize) {
-    User.init({
+  static init(sequelize) {  // 'initiate'를 'init'으로 변경
+    return super.init({  // 'User.init' 대신 'super.init' 사용
       email: {
         type: Sequelize.STRING(40),
         allowNull: true,
@@ -45,7 +45,7 @@ class User extends Sequelize.Model {
       through: 'Follow',
     });
     db.User.belongsToMany(db.User, {
-      foreignKey: 'followerId',
+      foreignKey: 'followerId', // 서로 반대의 아이디
       as: 'Followings',
       through: 'Follow',
     });

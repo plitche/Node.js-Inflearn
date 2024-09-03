@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 class Post extends Sequelize.Model {
-  static initiate(sequelize) {
-    Post.init({
+  static init(sequelize) {  // 'initiate'를 'init'으로 변경
+    return super.init({
       content: {
         type: Sequelize.STRING(140),
         allowNull: false,
@@ -25,7 +25,7 @@ class Post extends Sequelize.Model {
   
   static associate(db) {
     db.Post.belongsTo(db.User);
-    db.Post.belongsToMany(db.Hashtag, {through: 'PostHashtag'});
+    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
   }
 }
 

@@ -4,24 +4,24 @@ const config  = require('../config/config.json')[env];
 
 const User = require('./user');
 const Post = require('./post');
-const HashTag = require('./hashtag');
+const Hashtag = require('./hashtag');
 
-const db        = {};
-const sequelize = new Sequelize(
-  config.database, config.username, config.password, config,
-)
+const db = {};
+const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
 db.User = User;
 db.Post = Post;
-db.HashTag = HashTag;
+db.Hashtag = Hashtag;
 
 User.init(sequelize);
 Post.init(sequelize);
-HashTag.init(sequelize);
+Hashtag.init(sequelize);
 
 User.associate(db);
 Post.associate(db);
-HashTag.associate(db);
+Hashtag.associate(db);
 
 module.exports = db;
