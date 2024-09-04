@@ -1,0 +1,27 @@
+* 패스포트 설치하기
+	- 로그인 과정을 쉽게 처리할 수 있게 도와주는 Passport
+		> 비밀번호 암호화를 위한 bcrypt도 같이 설치
+		> 설치 후 app.js와도 연결
+		> passport.initialize() : 요청 객체에 passprt 설정을 심음
+		> passport.session() : req.session 객체에 passport 정보를 저장
+		> express-session 미들웨어 의존하므로 이모다 더 뒤에 위치해야함
+		
+		> npm i passport passport-local passport-kakao bcrypt
+		
+* 패스포트 처리 과정
+	- 로그인 과정
+		1. 로그인 요청이 들어옴
+		2. passport.authenticate 메서드 호출
+		3. 로그인 전략 수행
+		4. 로그인 성공 시 사용자 정보 객체와 함꼐 req.login 호출
+		5. req.login 메서드가 passport.serializeUser 호출
+		6. req.session에 사용자 아이디만 저장
+		7. 로그인 완료
+		
+	- 로그인 이후 과정
+		1. 모든 요청에 passport.session() 미들웨어가 passport.deserializeUser 메서드 호출
+		2. req.session에 저장된 아이디로 데이터베이스에서 사용자 조회
+		3. 조회된 사용자 정보를 req.user에 저장
+		4. 라우터에서 req.user 객체 사용 가능
+		
+		
