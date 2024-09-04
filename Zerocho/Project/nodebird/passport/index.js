@@ -10,7 +10,7 @@ module.exports = () => {
 
     passport.deserializeUser((id, done) => {
         User.findOne({ where: { id } })
-            .then(user => done(null, user))
+            .then(user => done(null, user)) // id가 일치하는 user를 찾아서 유저 정보를 복구해준다.
             .catch(err => done(err));
     })
 
