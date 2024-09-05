@@ -11,6 +11,7 @@ dotenv.config(); // 가능한 젤 위에
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
+const passportConfig = require('/passport')
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
@@ -28,6 +29,7 @@ sequelize.sync({ force: false })
   .catch((err) => {
     console.error(err);
   });
+passportConfig();
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
