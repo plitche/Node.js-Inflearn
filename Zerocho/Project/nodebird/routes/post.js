@@ -42,6 +42,22 @@ router.post('/', isLoggedIn, upload.none, async (req, res, next) => {
             img: req.body.url,
             UserId: req.user.id,
         })
+        const hashtags = req.body.content.match(/#[^\s#]*/g); // #으로 시작해서 띄워쓰기나 #이 아닌
+        // [#노드, #익스프레스]
+        // [노드, 익스프레스]
+        // [findOrCreate(노드), findOrCreate(익스프레스)]
+        // [[해시태그, false], [해시태그, true]]
+        if (hashtags) {
+          const result = await Promise.all(
+            hashtags.map(tag => {
+              return Hashtag.findOrCreate({
+                where: { title: tag.slice(1).toLowerCase() },
+              })
+            }),
+          )
+          await post.addHashtags(result.map(r => r[0]));
+          // addHashtags([해시태그], [해시태그])
+        }
         res.redirect('/');
     } catch (error) {
         console.error(error);
