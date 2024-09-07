@@ -9,10 +9,13 @@ module.exports = () => {
     });
 
     passport.deserializeUser((id, done) => {
-        User.findOne({ where: { id } })
+        User.findOne({ 
+            where: { id } ,
+            include: [],
+        })
             .then(user => done(null, user)) // id가 일치하는 user를 찾아서 유저 정보를 복구해준다.
             .catch(err => done(err));
-    })
+        })
 
     local();
     kakao();
