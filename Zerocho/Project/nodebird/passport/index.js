@@ -11,7 +11,15 @@ module.exports = () => {
     passport.deserializeUser((id, done) => {
         User.findOne({ 
             where: { id } ,
-            include: [],
+            include: [{
+                moodel: User,
+                attributes: ['id', 'nick'],
+                as: 'Followers',
+            }, {
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followings',
+            }],
         })
             .then(user => done(null, user)) // id가 일치하는 user를 찾아서 유저 정보를 복구해준다.
             .catch(err => done(err));
